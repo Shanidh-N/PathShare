@@ -1,0 +1,13 @@
+<!-- rideshare/templates/register.html -->
+<form method="post">
+    {% csrf_token %}
+    <label for="user_type">Register as:</label>
+    <select name="user_type">
+        <option value="passenger">Passenger</option>
+        <option value="driver">Driver</option>
+    </select><br>
+
+    {{ form.as_p }}
+
+    <button type="submit">Register</button>
+</form>

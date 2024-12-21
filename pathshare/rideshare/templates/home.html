@@ -1,0 +1,103 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ride Share</title>
+  <link rel="stylesheet" href="{% static 'homeStyle.css' %}">
+
+  <script src="https://maps.googleapis.com/maps/api/js?key=yourAPIkey&libraries=places" async defer></script>
+    <script>
+        function initializeAutocomplete() {
+            var startInput = document.getElementById('start_location');
+            var endInput = document.getElementById('end_location');
+
+            var options = {
+                componentRestrictions: { country: 'IN' }, 
+                bounds: new google.maps.LatLngBounds(
+                    new google.maps.LatLng(12.803, 77.559), 
+                    new google.maps.LatLng(13.228, 77.784) 
+                ),
+                strictBounds: true
+            };
+
+            var startAutocomplete = new google.maps.places.Autocomplete(startInput, options);
+            var endAutocomplete = new google.maps.places.Autocomplete(endInput, options);
+
+            startAutocomplete.setFields(['place_id', 'geometry', 'name']);
+            endAutocomplete.setFields(['place_id', 'geometry', 'name']);
+        }
+
+        window.addEventListener('load', initializeAutocomplete);
+    </script>
+
+
+</head>
+<body>
+  <header>
+    <h1>Ride Share</h1>
+  </header>
+
+  <main>
+    <div class="form-container">
+      <form method="POST" action="{% url 'create_ride' %}">
+        {% csrf_token %}
+        <h2>Book Your Ride</h2>
+
+        <button type="button" class="female-only-btn" id="female-only-btn">Female Only Sharing</button>
+        <input type="hidden" id="female-only-hidden" name="female_only" value="false">
+
+        <div class="input-group">
+            <label for="start_location">Start Location:</label><br>
+            <input type="text" id="start_location" name="start_location" required>
+        </div>
+          
+        <div class="input-group">
+          
+          <label for="end_location">End Location:</label><br>
+          <input type="text" id="end_location" name="end_location" required>
+           
+        </div>
+
+        <div class="input-group toggle-group">
+          <label class="toggle-label">Individual Ride</label>
+          <label class="switch">
+            <input type="checkbox" id="ride-type" name ="shared">
+            <span class="slider"></span>
+          </label>
+          <span class="ride-type-label" id="ride-type-label">Shared Ride</span>
+        </div>
+
+        <button type="submit" class="submit-btn">Submit</button>
+      </form>
+    </div>
+    
+  </main>
+  
+
+  <footer>
+    <a href="{% url 'home' %}"><button class="footer-btn">Home</button></a>
+    <a href="{% url 'chatroom' %}"><button class="footer-btn">Chatroom</button></a>
+    <a href="{% url 'previous_rides' %}"><button class="footer-btn">Previous rides</button></a>
+    <a href="{% url 'profile' %}"><button class="footer-btn">Profile</button></a>
+  </footer>
+
+  
+<script>
+  const femaleOnlyBtn = document.getElementById('female-only-btn');
+  const femaleOnlyHidden = document.getElementById('female-only-hidden');
+
+  femaleOnlyBtn.addEventListener('click', function() {
+    if (femaleOnlyHidden.value === 'true') {
+      femaleOnlyHidden.value = 'false';
+      femaleOnlyBtn.style.backgroundColor = '#ff7f7f'; 
+    } else {
+      femaleOnlyHidden.value = 'true';
+      femaleOnlyBtn.style.backgroundColor = 'green'; 
+    }
+  });
+</script>
+</body>
+</html>

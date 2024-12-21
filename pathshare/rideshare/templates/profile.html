@@ -1,0 +1,49 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile</title>
+  <link rel="stylesheet" href="{% static 'profileStyle.css' %}">
+  
+</head>
+<body>
+  <header>
+    <h1>Ride Share</h1>
+  </header>
+
+   <br><br><br><br><br><br><br><br><br>
+  <main>
+    <div class="profile-container">
+      <div class="profile-pic">
+        <img src="{{ customer.profile_pic }}" alt="Profile Picture">
+      </div>
+      <div class="profile-details">
+        <h2>{{ customer.customer_name }}</h2>
+        <p><strong>Email:</strong> {{ customer.email }}</p>
+        <p><strong>Phone Number:</strong> {{ customer.phone_number }}</p>
+        <p><strong>Gender:</strong> {{ customer.gender }}</p>
+        
+        <a href="{% url 'logout' %}"><button class="edit-btn">Logout</button></a>
+      </div>
+
+      <div class="action-buttons">
+        <button class="help-btn">Help</button>
+        <a href="{% url 'calculate_fare' %}">
+          <button class="contact-btn">Calculate Fare</button>
+        </a>
+      
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <a href="{% url 'home' %}"><button class="footer-btn">Home</button></a>
+    <a href="{% url 'chatroom' %}"><button class="footer-btn">Chatroom</button></a>
+    <a href="{% url 'previous_rides' %}"><button class="footer-btn">Previous rides</button></a>
+    <a href="{% url 'profile' %}"><button class="footer-btn">Profile</button></a>
+  </footer>
+</body>
+</html>

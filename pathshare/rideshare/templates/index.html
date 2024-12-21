@@ -1,0 +1,80 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration/Login Page</title>
+  <link rel="stylesheet" href="{% static 'styles.css' %}">
+  {% if alert_message %}
+    <script type="text/javascript">
+        alert("{{ alert_message }}");
+    </script>
+  {% endif %}
+</head>
+<body>
+  <div class="container">
+    <div class="form-container">
+      <input type="radio" id="reg-tab" name="tab" checked>
+      <input type="radio" id="login-tab" name="tab">
+      <div class="tab-labels">
+        <label for="reg-tab">Register</label>
+        <label for="login-tab">Login</label>
+      </div>
+      <div class="forms">
+        <form id="registration-form" class="form" method="POST" action="{% url 'registration' %}">
+          {% csrf_token %}
+          <h2>Register</h2>
+          <div class="input-group">
+              <input type="text" id="reg-name" name="reg-name" value="" required>
+              <label for="reg-name">Name</label>
+          </div>
+          <div class="input-group">
+              <input type="email" id="reg-email" name="reg-email" required>
+              <label for="reg-email">Email</label>
+          </div>
+          <div class="input-group">
+              <input type="tel" id="reg-phone" name="reg-phone" required>
+              <label for="reg-phone">Phone Number</label>
+          </div>
+          <div class="input-group">
+              <input type="text" id="reg-gender" name="reg-gender" required>
+              <label for="reg-gender">Gender</label>
+          </div>
+          <div class="input-group">
+              <input type="text" id="reg-pic" name="reg-pic" required>
+              <label for="reg-pic">Profile Pic</label>
+          </div>
+          <div class="input-group">
+              <input type="password" id="reg-password" name="reg-password" value = "" required>
+              <label for="reg-password">Password</label>
+          </div>
+          <button type="submit" class="submit-btn">Register</button>
+      </form>
+     
+        <form id="login-form" class="form" method="POST" action="{% url 'login' %}">
+        {% csrf_token %}
+          <h2>Login</h2>
+          <div class="input-group">
+            <input type="text" id="login-name" name= "name" required>
+            <label for="login-name">Name</label>
+          </div>
+          <div class="input-group">
+            <input type="password" id="login-password" name = "password" required>
+            <label for="login-password">Password</label>
+          </div>
+          <button type="submit" class="submit-btn">Login</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function redirectToHome(event) {
+      event.preventDefault(); 
+      window.location.href = "home.html"; 
+    }
+  </script>
+</body>
+</html>

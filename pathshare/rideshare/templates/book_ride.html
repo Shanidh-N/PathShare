@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a Ride</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"> <!-- Link to CSS if needed -->
+</head>
+<body>
+    <header>
+        <h1>Book a Ride</h1>
+    </header>
+
+    <main>
+        <form method="post" action="{% url 'book_ride' %}">
+            {% csrf_token %}
+            <div>
+                <label for="pickup">Pickup Location:</label>
+                <input type="text" id="pickup" name="pickup" required>
+            </div>
+
+            <div>
+                <label for="destination">Destination:</label>
+                <input type="text" id="destination" name="destination" required>
+            </div>
+
+            <div>
+                <label for="ride_type">Ride Type:</label>
+                <select id="ride_type" name="ride_type">
+                    <option value="standard">Standard</option>
+                    <option value="premium">Premium</option>
+                    <option value="shared">Shared</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="time">Pickup Time:</label>
+                <input type="datetime-local" id="time" name="time" required>
+            </div>
+
+            <button type="submit">Book Ride</button>
+        </form>
+
+        <p><a href="{% url 'passenger_dashboard' %}">Back to Dashboard</a></p>
+    </main>
+</body>
+</html>
