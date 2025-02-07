@@ -1,0 +1,70 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chatroom</title>
+  <link rel="stylesheet" href="{% static 'homeStyle.css' %}">
+  <link rel="stylesheet" href="{% static 'chatroomStyle.css' %}">
+</head>
+<body>
+  <header>
+    <h1>Ride Share</h1>
+  </header>
+
+  <main>
+    <div class="chat-container">
+      <div class="btn-container">
+        <button class="create-join-btn" onclick="alert('Feature coming soon!')">Create/Join Club</button>
+      </div>
+      
+      <div class="chat-box" id="chat-box">
+        <div class="message">
+          <span class="sender">Raj:</span>
+          <span class="text">Hey! Anyone up for a ride?</span>
+        </div>
+        <div class="message">
+          <span class="sender">Manish:</span>
+          <span class="text">Sure! Where are you headed?</span>
+        </div>
+        <div class="message">
+          <span class="sender">Raj:</span>
+          <span class="text">I'm going to Marathahalli.</span>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <input type="text" id="message-input" placeholder="Type a message...">
+        <button type="button" onclick="sendMessage()">Send</button>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <a href="{% url 'home' %}"><button class="footer-btn">Home</button></a>
+    <a href="{% url 'chatroom' %}"><button class="footer-btn">Chatroom</button></a>
+    <a href="{% url 'previous_rides' %}"><button class="footer-btn">Previous rides</button></a>
+    <a href="{% url 'profile' %}"><button class="footer-btn">Profile</button></a>
+  </footer>
+
+  <script>
+    function sendMessage() {
+      const messageInput = document.getElementById('message-input');
+      const chatBox = document.getElementById('chat-box');
+      const messageText = messageInput.value.trim();
+
+      if (messageText) {
+        const messageDiv = document.createElement('div');
+        messageDiv.classList.add('message');
+        messageDiv.innerHTML = `<span class="sender">You:</span> <span class="text">${messageText}</span>`;
+
+        chatBox.appendChild(messageDiv);
+        messageInput.value = '';
+        chatBox.scrollTop = chatBox.scrollHeight; 
+      }
+    }
+  </script>
+</body>
+</html>

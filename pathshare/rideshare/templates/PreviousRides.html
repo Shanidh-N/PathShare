@@ -1,0 +1,57 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Previous Rides</title>
+  <link rel="stylesheet" href="{% static 'previousRidesStyle.css' %}">
+</head>
+<body>
+  <header>
+    <h1>Ride Share</h1>
+  </header>
+
+  <br><br><br><br><br><br>
+  <main>
+    <div class="rides-container">
+      
+      <div class="ride-card">
+        <h3>Marathahalli to CMRIT</h3>
+        <p><strong>Date:</strong> 2024-11-05</p>
+        <p><strong>Time:</strong> 10:30 AM</p>
+        <p><strong>Cost:</strong> ₹150</p>
+      </div>
+
+      <div class="ride-card">
+        <h3>Kundalahalli Metro to Majestic</h3>
+        <p><strong>Date:</strong> 2024-11-07</p>
+        <p><strong>Time:</strong> 12:45 PM</p>
+        <p><strong>Cost:</strong> ₹200</p>
+      </div>
+
+      <div class="ride-card">
+        <h3>Indiranagar to Koramangala</h3>
+        <p><strong>Date:</strong> 2024-10-30</p>
+        <p><strong>Time:</strong> 5:00 PM</p>
+        <p><strong>Cost:</strong> ₹180</p>
+      </div>
+
+      <div class="ride-card">
+        <h3>Whitefield to Marathahalli</h3>
+        <p><strong>Date:</strong> 2024-10-28</p>
+        <p><strong>Time:</strong> 8:15 AM</p>
+        <p><strong>Cost:</strong> ₹120</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <a href="{% url 'home' %}"><button class="footer-btn">Home</button></a>
+    <a href="{% url 'chatroom' %}"><button class="footer-btn">Chatroom</button></a>
+    <a href="{% url 'previous_rides' %}"><button class="footer-btn">Previous rides</button></a>
+    <a href="{% url 'profile' %}"><button class="footer-btn">Profile</button></a>
+  </footer>
+</body>
+</html>
