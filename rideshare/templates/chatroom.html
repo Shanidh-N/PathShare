@@ -1,0 +1,146 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chatroom</title>
+  <link rel="stylesheet" href="{% static 'homeStyle.css' %}">
+  <link rel="stylesheet" href="{% static 'club.css' %}">
+
+  <style>
+    /* Ensure that modal has a lower z-index than the autocomplete dropdown */
+    #createGroupModal {
+      z-index: 1000;
+      position: fixed;
+    }
+
+    /* Set a higher z-index for the autocomplete dropdown */
+    .pac-container {
+      z-index: 9999 !important;
+      position: relative;
+    }
+
+    
+  </style>
+
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxoe1p0VmnCiU90-CRs8Y3veMKwBo1R0o&libraries=places" async defer></script>
+  <script>
+    function initializeAutocomplete() {
+        // Get input fields
+        var startInput = document.getElementById('source');
+        var endInput = document.getElementById('destination');
+
+        // Set options for Autocomplete
+        var options = {
+            componentRestrictions: { country: 'IN' }, // Restrict to India
+            bounds: new google.maps.LatLngBounds(
+                new google.maps.LatLng(12.803, 77.559),  // Define bounds
+                new google.maps.LatLng(13.228, 77.784)
+            ),
+            strictBounds: true // Ensure results are within the defined bounds
+        };
+
+        // Create Autocomplete instances for the input fields
+        var startAutocomplete = new google.maps.places.Autocomplete(startInput, options);
+        var endAutocomplete = new google.maps.places.Autocomplete(endInput, options);
+
+        // Set the fields you want to retrieve from the Autocomplete results
+        startAutocomplete.setFields(['place_id', 'geometry', 'name']);
+        endAutocomplete.setFields(['place_id', 'geometry', 'name']);
+    }
+
+    // Initialize Autocomplete after the window has loaded
+    window.addEventListener('load', initializeAutocomplete);
+</script>
+
+
+</head>
+<body style="background-image: url('{% static "heome2.jpg" %}'); background-size: cover; background-position: center; background-repeat: no-repeat; color: #333;">
+  <header>
+    <h1>Ride Share</h1>
+  </header>
+
+  <main>
+    <div class="chat-container">
+      <h2>Your Clubs</h2>
+
+      <div class="club-list">
+        {% for group in groups %}
+          <div class="club-item">
+            <strong>{{ group.source }} → {{ group.destination }}</strong><br>
+            <p>{{ group.member_count }}/4 members</p>
+            <a href="{% url 'pin_board' group.id %}">
+              <button>Message</button>
+            </a>
+          </div>
+        {% empty %}
+          <div class="club-item">
+            <p>You're not a part of any club</p>
+          </div>
+        {% endfor %}
+      </div>
+
+      <button class="btn-success" id="createGroupBtn">Create/Join a Club</button>
+
+      <!-- Pop-up Form Modal -->
+      <div id="createGroupModal" class="modal">
+        <div class="modal-content">
+          <span class="close" id="closeModal">&times;</span>
+          <h2>Create a Club</h2>
+          <form id="createGroupForm" method="POST" action="{% url 'create_group' %}">
+            {% csrf_token %}
+            <label for="source">Source:</label>
+            <input type="text" name="source" id="source" required><br>
+
+            <label for="destination">Destination:</label>
+            <input type="text" name="destination" id="destination" required><br>
+
+            <label for="day_of_journey">Day of Journey:</label>
+            <input type="text" name="day_of_journey" id="day_of_journey" required><br>
+
+            <label for="time_of_journey">Time of Journey:</label>
+            <input type="time" name="time_of_journey" id="time_of_journey" required><br>
+
+            <label for="create_new">Create New?(Unselect if you're okay with joining existing clubs)</label>
+            <input type="checkbox" name="create_new" id="create_new"><br>
+            
+            <label for="female_only">Female Only:</label>
+            <input type="checkbox" name="female_only" id="female_only"><br>
+
+            <button type="submit">Create Group</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <a href="{% url 'home' %}"><button class="footer-btn">Home</button></a>
+    <a href="{% url 'chatroom' %}"><button class="footer-btn">Club</button></a>
+    <a href="{% url 'previous_rides' %}"><button class="footer-btn">Previous rides</button></a>
+    <a href="{% url 'profile' %}"><button class="footer-btn">Profile</button></a>
+  </footer>
+
+  <script>
+    // Show modal on button click
+    document.getElementById("createGroupBtn").onclick = function() {
+      document.getElementById("createGroupModal").style.display = "block";
+    };
+
+    // Close modal when the user clicks on <span> (x)
+    document.getElementById("closeModal").onclick = function() {
+      document.getElementById("createGroupModal").style.display = "none";
+    };
+
+    // Close modal if the user clicks anywhere outside the modal
+    window.onclick = function(event) {
+      if (event.target === document.getElementById("createGroupModal")) {
+        document.getElementById("createGroupModal").style.display = "none";
+      }
+    };
+  </script>
+
+</body>
+</html>

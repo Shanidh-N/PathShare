@@ -1,0 +1,201 @@
+/* General Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Title for Clubs */
+h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+}
+
+/* Club List */
+.chat-container .club-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)) !important;
+    gap: 20px !important;
+    padding: 20px !important;
+}
+
+/* Club Item */
+.chat-container .club-list .club-item {
+    background-color: #f9f9f9 !important;
+    border: 1px solid #ddd !important;
+    border-radius: 8px !important;
+    padding: 20px !important;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1) !important;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+/* Hover effect */
+.chat-container .club-list .club-item:hover {
+    transform: translateY(-5px) !important;
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1) !important;
+}
+
+.chat-container .club-list .club-item strong {
+    font-size: 1.2rem !important;
+    color: #6e8efb !important;
+}
+
+.chat-container .club-list .club-item span {
+    font-size: 1rem !important;
+    color: #e63946 !important;
+}
+
+.chat-container .club-list .club-item p {
+    font-size: 1rem !important;
+    color: #333 !important;
+}
+
+/* Button styles */
+.chat-container .club-list .club-item button {
+    background-color: #007bff !important;
+    color: white !important;
+    padding: 10px 20px !important;
+    border-radius: 5px !important;
+    font-size: 1rem !important;
+    font-weight: bold !important;
+    border: none !important;
+    cursor: pointer !important;
+    transition: background-color 0.3s ease !important;
+}
+
+/* Hover effect for button */
+.chat-container .club-list .club-item button:hover {
+    background-color: #0056b3 !important;
+}
+
+/* Button to open modal */
+.btn-success {
+    background-color: #28a745 !important;
+    color: white !important;
+    padding: 10px 20px !important;
+    border-radius: 5px !important;
+    font-size: 1rem !important;
+    font-weight: bold !important;
+    border: none !important;
+    cursor: pointer !important;
+    display: block !important;
+    margin: 20px auto !important;
+}
+
+/* Modal Styles (Create Club Form) */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1001 !important; /* Higher than footer */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    position: relative;
+}
+
+.close {
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    cursor: pointer;
+}
+
+/* Form Input Styles */
+.modal-content input[type="text"],
+.modal-content input[type="time"],
+.modal-content input[type="checkbox"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+#female_only {
+    margin: 10px 0;
+    width: auto;
+}
+
+button[type="submit"] {
+    background-color: #28a745 !important;
+    color: white !important;
+    padding: 10px 20px !important;
+    border-radius: 5px !important;
+    font-size: 1.1rem !important;
+    font-weight: bold !important;
+    border: none !important;
+    cursor: pointer !important;
+    transition: background-color 0.3s ease !important;
+    width: 100% !important;
+    margin-top: 10px !important;
+}
+
+button[type="submit"]:hover {
+    background-color: #218838 !important;
+}
+
+/* Footer Styles */
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #fff;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    height: 50px;
+}
+
+/* Footer Button Styles */
+.footer-btn {
+    background: none;
+    border: none;
+    font-size: 1em;
+    color: #6e8efb;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    padding: 5px 15px;
+}
+
+.footer-btn:hover {
+    color: #5b7de3;
+}
+
+/* Debugging - Check if styles are being applied */
+.chat-container .club-list .club-item {
+    border: 3px solid red !important; /* Debugging */
+}

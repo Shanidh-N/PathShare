@@ -1,0 +1,192 @@
+/* General Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  /* background: linear-gradient(135deg, #6e8efb, #a777e3); */
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: #fff;
+  padding: 10px 20px;
+  text-align: center;
+  font-size: 1.3em;
+  font-weight: bold;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  color: #333;
+}
+
+/* Main Content */
+main {
+  padding-top: 80px; /* Adjusted for smaller header */
+  padding: 20px;
+  flex: 1;
+}
+
+/* Section styles */
+.ride-section {
+  margin-bottom: 40px;
+}
+
+/* Ride Title */
+h2.ride-title {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #333;
+  text-align: center;
+}
+
+/* Ride Card */
+.ride-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover effect for ride card */
+.ride-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Ride Information */
+.ride-card h3 {
+  font-size: 18px;
+  margin-bottom: 15px;
+  color: #6e8efb;
+  text-align: center;
+}
+
+.ride-card p {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+/* List Style for Passengers */
+.ride-card ul {
+  list-style-type: none;
+  margin-top: 10px;
+}
+
+.ride-card li {
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: #555;
+  text-align: left;
+}
+
+/* Footer Styles */
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #fff;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+/* Footer Button Styles */
+.footer-btn {
+  background: none;
+  border: none;
+  font-size: 1em;
+  color: #6e8efb;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.footer-btn:hover {
+  color: #5b7de3;
+}
+
+/* Highlighting the Cost */
+.ride-card .highlight {
+  font-size: 1.6rem;
+  color: #e63946;
+  font-weight: bold;
+  margin: 15px 0;
+  display: inline-block;
+  border: 2px dashed #e63946;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #fff3f3;
+  text-align: center;
+}
+
+
+/* Calculate Fare Button */
+.calculate-fare-btn {
+  display: inline-block;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: #007bff;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  margin-top: 20px;
+  cursor: pointer; /* Added to indicate that it's clickable */
+  border: none; /* Remove default button border */
+  transition: background-color 0.3s ease;
+  text-align: center;
+}
+
+/* Hover effect */
+.calculate-fare-btn:hover {
+  background-color: #0056b3;
+}
+
+/* Focus effect for accessibility */
+.calculate-fare-btn:focus {
+  outline: 2px solid #ffcc00; /* A visible focus outline */
+}
+
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .ride-card {
+    width: 90%;
+  }
+
+  .ride-title,
+  .ride-card h3 {
+    font-size: 1.2rem;
+  }
+
+  .ride-card p,
+  .ride-card li {
+    font-size: 14px;
+  }
+
+  .footer-btn {
+    font-size: 0.9em;
+  }
+
+  .calculate-fare-btn {
+    font-size: 1rem;
+  }
+}

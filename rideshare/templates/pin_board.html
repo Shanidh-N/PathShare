@@ -1,0 +1,24 @@
+{% load static %}
+
+<h2>Club: {{ group.source }} → {{ group.destination }}</h2>
+
+<form method="POST">
+  {% csrf_token %}
+  <label for="message">Select a message:</label>
+  <select name="message" id="message">
+    <option value="NOT_COMING">Not coming</option>
+    <option value="LATE_5">Late by 5 min</option>
+    <option value="LATE_10">Late by 10 min</option>
+    <option value="READY">Ready to go</option>
+  </select>
+  <button type="submit">Send</button>
+</form>
+
+<h3>Previous Messages:</h3>
+<ul>
+  {% for message in messages %}
+    <li>{{ message.sender.customer_name }}: {{ message.get_text_display }} ({{ message.timestamp }})</li>
+  {% empty %}
+    <li>No messages yet.</li>
+  {% endfor %}
+</ul>
