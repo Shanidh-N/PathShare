@@ -1,24 +1,46 @@
 {% load static %}
 
-<h2>Club: {{ group.source }} → {{ group.destination }}</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ride Sharing Chat - {{ group.source }} → {{ group.destination }}</title>
+    <link rel="stylesheet" href="{% static 'messages.css' %}">
+</head>
+<body>
 
-<form method="POST">
-  {% csrf_token %}
-  <label for="message">Select a message:</label>
-  <select name="message" id="message">
-    <option value="NOT_COMING">Not coming</option>
-    <option value="LATE_5">Late by 5 min</option>
-    <option value="LATE_10">Late by 10 min</option>
-    <option value="READY">Ready to go</option>
-  </select>
-  <button type="submit">Send</button>
-</form>
+  <div class="container">
+    <!-- Group Header -->
+    <h2>Club: {{ group.source }} → {{ group.destination }}</h2>
 
-<h3>Previous Messages:</h3>
-<ul>
-  {% for message in messages %}
-    <li>{{ message.sender.customer_name }}: {{ message.get_text_display }} ({{ message.timestamp }})</li>
-  {% empty %}
-    <li>No messages yet.</li>
-  {% endfor %}
-</ul>
+    <div class="chat-box">
+        <!-- Left Section: Input Box -->
+        <div class="input-section">
+            <form method="POST">
+                {% csrf_token %}
+                <label for="message">Type your message:</label>
+                <input type="text" name="message" id="message" required placeholder="Enter your message...">
+                <button type="submit">Send</button>
+            </form>
+        </div>
+
+        <!-- Right Section: Messages -->
+        <div class="messages-section">
+            <h3>Previous Messages:</h3>
+            <ul>
+                {% for message in messages %}
+                    <li>
+                        <span class="sender">{{ message.sender.customer_name }}:</span> 
+                        <span class="text">{{ message.get_text_display }}</span>
+                        <span class="timestamp">({{ message.timestamp }})</span>
+                    </li>
+                {% empty %}
+                    <li class="no-messages">No messages yet.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+
+</body>

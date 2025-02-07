@@ -363,26 +363,62 @@ def create_group(request):
         destination = request.POST.get("destination")
         day_of_journey = request.POST.get("day_of_journey")
         time_of_journey = request.POST.get("time_of_journey")
+        create_new_group = request.POST.get("create_new") == "on"
         female_only = request.POST.get("female_only") == "on"
 
-        # Create the group
-        group = Groups.objects.create(
+        # Check if a group with the same details already exists
+        existing_group = Groups.objects.filter(
             source=source,
             destination=destination,
             day_of_journey=day_of_journey,
             time_of_journey=time_of_journey,
+<<<<<<< HEAD
             female_only=female_only,
             created_by=customer.customer_id  # Associate with the session customer
         )
+=======
+            female_only=female_only
+        ).first()
+>>>>>>> 82750d8 (Chatroom updated)
 
-        # Add the customer to the members list of the group
-        group.members.add(customer.customer_id)  # Add customer ID to the members list
-        group.member_count += 1  # Increment the member count
-        group.save()  # Save the group after modification
+        if existing_group and existing_group.member_count<=4:
+            if create_new_group:
+                # If the user wants to create a new group, ignore the existing group and create a new one
+                group = Groups.objects.create(
+                    source=source,
+                    destination=destination,
+                    day_of_journey=day_of_journey,
+                    time_of_journey=time_of_journey,
+                    female_only=female_only,
+                    created_by=customer.customer_id
+                )
+                group.members.add(customer.customer_id)
+                group.member_count += 1
+            else:
+                # Otherwise, add the customer to the existing group
+                group = existing_group
+                group.members.add(customer.customer_id)
+                group.member_count += 1
+
+            group.save()  # Save the group after modification
+        else:
+            # Create a new group if no group with the same details exists
+            group = Groups.objects.create(
+                source=source,
+                destination=destination,
+                day_of_journey=day_of_journey,
+                time_of_journey=time_of_journey,
+                female_only=female_only,
+                created_by=customer.customer_id
+            )
+            group.members.add(customer.customer_id)  # Add the customer to the group
+            group.member_count += 1  # Increment the member count
+            group.save()  # Save the group after modification
 
         return redirect("chatroom")
 
     return HttpResponseForbidden("403 Forbidden - Invalid request method")
+
 
 def chatroom(request, group_id=None):
     customer_id = request.session.get("customer_id")
@@ -416,7 +452,11 @@ def pin_board(request, group_id):
         return redirect("login")
 
     customer = Customer.objects.get(customer_id=customer_id)
+<<<<<<< HEAD
     group = get_object_or_404(Groups, group_id=group_id)  # Use group_id instead of id
+=======
+    group = get_object_or_404(Groups, group_id=group_id)
+>>>>>>> 82750d8 (Chatroom updated)
 
     # Check if the customer is a member
     if customer not in group.members.all():

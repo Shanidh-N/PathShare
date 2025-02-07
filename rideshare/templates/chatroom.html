@@ -71,7 +71,7 @@
           <div class="club-item">
             <strong>{{ group.source }} → {{ group.destination }}</strong><br>
             <p>{{ group.member_count }}/4 members</p>
-            <a href="{% url 'pin_board' group.id %}">
+            <a href="{% url 'pin_board' group.group_id %}">
               <button>Message</button>
             </a>
           </div>
