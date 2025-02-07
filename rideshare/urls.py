@@ -23,6 +23,8 @@ urlpatterns = [
     path('calculate_fare/', views.calculate_fare, name='calculate_fare'),
     path('previous_rides/',views.previous_rides,name='previous_rides'),
     path('chatroom/', views.chatroom, name='chatroom'),
-    path('pin_board/<int:group_id>/', views.pin_board, name='pin_board'),
+    path('pin_board/<str:group_id>/', views.pin_board, name='pin_board'),
+
+
 
 ]
