@@ -372,7 +372,7 @@ def create_group(request):
             day_of_journey=day_of_journey,
             time_of_journey=time_of_journey,
             female_only=female_only,
-            created_by=customer  # Associate with the session customer
+            created_by=customer.customer_id  # Associate with the session customer
         )
 
         # Add the customer to the members list of the group
@@ -416,7 +416,7 @@ def pin_board(request, group_id):
         return redirect("login")
 
     customer = Customer.objects.get(customer_id=customer_id)
-    group = get_object_or_404(Groups, id=group_id)
+    group = get_object_or_404(Groups, group_id=group_id)  # Use group_id instead of id
 
     # Check if the customer is a member
     if customer not in group.members.all():
